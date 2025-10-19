@@ -1,12 +1,6 @@
-#include "Window.hpp"
+#include "Game.hpp"
 
 int main() {
-    CWindow window;
-    window.Create("CombatTeam", 800, 600);
-
-    while(!window.ShouldClose()) {
-        //?
-    }
-
-    window.Destroy();
+    CBaseGame game;
+    game.Init();
 };
