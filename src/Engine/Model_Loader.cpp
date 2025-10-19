@@ -10,6 +10,11 @@ void CModel_Loader::ReadVertices(void) noexcept {
 
     std::string current_line;
     while(std::getline(file, current_line)) {
-        std::cout << current_line << std::endl;
+
+        struct Strings line_split = String_split(current_line.c_str(), ' ');
+        for(int i = 0; i < line_split.num; i++) {
+            std::cout << line_split.data[i] << std::endl;
+        }
+
     }
 };

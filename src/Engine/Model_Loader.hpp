@@ -4,6 +4,7 @@
 #include <vector>
 #include <string>
 #include "glm/glm.hpp"
+#include "String_Ext.hpp"
 
 class CModel_Loader {
 private:

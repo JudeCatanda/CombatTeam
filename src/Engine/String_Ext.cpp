@@ -1,4 +1,4 @@
-#include "String_Ext.h"
+#include "String_Ext.hpp"
 
 int String_GetLen(const char* buffer) {
     int _count = 0;
@@ -30,11 +30,11 @@ struct Strings String_split(const char* buffer, char delim) {
 
         if(current != delim) {
             splited_len += 1;
-            _buff_temp = realloc(_buff_temp, splited_len + 1);
+            _buff_temp = (char*)realloc(_buff_temp, splited_len + 1);
             _buff_temp[itr++] = current;
         } else {
             _buff_temp[itr] = 0;
-            _temp.data = realloc(_temp.data, sizeof(char*) * (_temp.num + 1));
+            _temp.data = (char**)realloc(_temp.data, sizeof(char*) * (_temp.num + 1));
             _temp.data[_temp.num] = (char*)malloc(String_GetLen(_buff_temp) + 1);
 
             for (int i = 0; i <= String_GetLen(_buff_temp); i++) {
@@ -55,7 +55,7 @@ struct Strings String_split(const char* buffer, char delim) {
 
     if (itr > 0) {
         _buff_temp[itr] = 0;
-        _temp.data = realloc(_temp.data, sizeof(char*) * (_temp.num + 1));
+        _temp.data = (char**)realloc(_temp.data, sizeof(char*) * (_temp.num + 1));
         _temp.data[_temp.num] = (char*)malloc(String_GetLen(_buff_temp) + 1);
         for (int i = 0; i <= String_GetLen(_buff_temp); i++) {
             _temp.data[_temp.num][i] = _buff_temp[i];
