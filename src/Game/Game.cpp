@@ -2,6 +2,8 @@
 
 void CBaseGame::Init() {
     m_window.Create("CombatTeam!", 600, 800);
+    m_modelLoader.CreateLoader("./assets/models/cube.obj");
+    m_modelLoader.ReadVertices();
     proccess();
 };
 
