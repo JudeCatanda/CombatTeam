@@ -1,20 +1,25 @@
 #include "Model_Loader.hpp"
 
 void CModel_Loader::ReadVertices(void) noexcept {
-    if(m_szReadingFileName == NULL)
+    if (m_szReadingFileName == nullptr)
         return;
 
-    std::ifstream file(m_szReadingFileName);
-    if(!file.is_open())
+    std::ifstream ifsModelFile(m_szReadingFileName);
+    if (!ifsModelFile.is_open())
         return;
 
-    std::string current_line;
-    while(std::getline(file, current_line)) {
+    std::string strLine;
+    std::string strToken;
 
-        struct Strings line_split = String_split(current_line.c_str(), ' ');
-        for(int i = 0; i < line_split.num; i++) {
-            std::cout << line_split.data[i] << std::endl;
+    while (std::getline(ifsModelFile, strLine)) {
+        std::istringstream issLine(strLine);
+
+        while (issLine >> strToken) {
+            if (strToken == "v") {
+                float fX, fY, fZ;
+                issLine >> fX >> fY >> fZ;
+                m_vecVertices.push_back(glm::vec3(fX, fY, fZ));
+            }
         }
-
     }
-};
+}

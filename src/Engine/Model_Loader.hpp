@@ -5,6 +5,9 @@
 #include <string>
 #include "glm/glm.hpp"
 #include "String_Ext.hpp"
+#include <cstring>
+#include <cstdlib>
+#include <sstream>
 
 class CModel_Loader {
 private:
