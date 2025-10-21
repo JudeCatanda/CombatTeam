@@ -1,25 +1,30 @@
 #include "Model_Loader.hpp"
 
-void CModel_Loader::ReadVertices(void) noexcept {
-    if (m_szReadingFileName == nullptr)
+void CModel_Loader::Read(void) noexcept {
+    if (!m_szReadingFileName)
         return;
 
-    std::ifstream ifsModelFile(m_szReadingFileName);
-    if (!ifsModelFile.is_open())
+    fastObjMesh* mesh = fast_obj_read(m_szReadingFileName);
+    if (!mesh)
         return;
 
-    std::string strLine;
-    std::string strToken;
+    m_vecVertices.clear();
+    m_vecIndices.clear();
 
-    while (std::getline(ifsModelFile, strLine)) {
-        std::istringstream issLine(strLine);
-
-        while (issLine >> strToken) {
-            if (strToken == "v") {
-                float fX, fY, fZ;
-                issLine >> fX >> fY >> fZ;
-                m_vecVertices.push_back(glm::vec3(fX, fY, fZ));
-            }
-        }
+    // Positions
+    for (unsigned int i = 0; i < mesh->position_count; ++i) {
+        glm::vec3 vertex(
+            mesh->positions[i * 3 + 0],
+            mesh->positions[i * 3 + 1],
+            mesh->positions[i * 3 + 2]
+        );
+        m_vecVertices.push_back(vertex);
     }
+
+    // Indices
+    for (unsigned int i = 0; i < mesh->index_count; ++i) {
+        m_vecIndices.push_back(mesh->indices[i].p);
+    }
+
+    fast_obj_destroy(mesh);
 }
