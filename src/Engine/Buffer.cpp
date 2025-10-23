@@ -31,6 +31,10 @@ void Buffer::Destroy() {
   glDeleteBuffers(1, &this->m_Handle);
 }
 
-std::string GetMapFromMapsDir(const char* szLevelName) {
-  return std::string(CURRENT_DIR ASSETS_DIR MAPS_DIR) + szLevelName+ "/" + szLevelName + ".map"; //wtf i am confused too
+std::string GetModelFromModelsDir(const char* szObjName) {
+  return std::string(CURRENT_DIR ASSETS_DIR MODELS_DIR) + szObjName;
+}
+
+std::string GetShaderFromMapDir(const char* szLevelName) {
+  return std::string(CURRENT_DIR ASSETS_DIR SHADERS_DIR) + szLevelName;
 };

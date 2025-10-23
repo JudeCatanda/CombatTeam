@@ -6,9 +6,9 @@
 #define CURRENT_DIR "./"
 #define ASSETS_DIR "assets/"
 #define SHADERS_DIR "shaders/"
-#define TEST_BUILD_DIR "test_build/"
 #define TEXTURES_DIR "textures/"
 #define MAPS_DIR "maps/"
+#define MODELS_DIR "models/"
 
 //SPECIAL MACROS
 //THESE SPECIAL MACROS BELOW NEEDED TO BE REMOVED... CONSIDER USING FUNCTIONS BELLOW
@@ -43,5 +43,5 @@ typedef struct Vertex {
   glm::vec2 Position;
 } Vertex;
 
-std::string GetMapFromMapsDir(const char* szLevelName);
 std::string GetShaderFromMapDir(const char* szLevelName);
+std::string GetModelFromModelsDir(const char* szObjName);
