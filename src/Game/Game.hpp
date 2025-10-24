@@ -12,13 +12,16 @@
 #include "Instance.hpp"
 
 class CBaseGame {
+private:
+    CWindow m_window;
+    CCamera m_camera;
+
+    std::vector< std::unique_ptr<IInstance3D> > m_Objects;
+
+    void proccess();
 public:
     void Init();
     void Update();
     void Render();
     void Destroy(); //alt name: cleanup
-private:
-    CWindow m_window;
-    std::vector< std::unique_ptr<IInstance3D> > m_Objects;
-    void proccess();
 };

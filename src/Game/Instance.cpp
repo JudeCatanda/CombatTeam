@@ -2,8 +2,8 @@
 
 void CCube::Create() {
 
-    m_Loader.CreateLoader(
-        std::string(GetModelFromModelsDir("cube.obj")).c_str());
+    m_Loader.CreateLoader("./assets/models/cube.obj");
+    m_Loader.Read();
 
     m_Vertex.Create(GetShaderFromMapDir("vcube.glsl"), GL_VERTEX_SHADER);
     m_Fragment.Create(GetShaderFromMapDir("fcube.glsl"), GL_FRAGMENT_SHADER);
@@ -33,4 +33,9 @@ void CCube::Draw(void) {
 
 
     glDrawElements(GL_TRIANGLES, m_vecModelIndices->size(), GL_UNSIGNED_INT, 0);
+};
+
+void CCamera::Create() {
+    m_matView = glm::lookAt(m_vecPosition, m_vecTarget, m_vecUp);
+    m_matProjection = glm::perspective(glm::radians(m_flFov), m_flAspectRatio, m_flNear, m_flFar);
 };

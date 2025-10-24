@@ -9,6 +9,9 @@ void CBaseGame::Init() {
         objects->Create();
     }
 
+    m_camera.Create();
+    m_camera.SetAspectRatio((float)*(m_window.GetAspectRatio()));
+
     proccess();
 };
 
