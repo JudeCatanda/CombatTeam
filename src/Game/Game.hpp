@@ -11,6 +11,16 @@
 
 #include "Instance.hpp"
 
+
+//-----------------------------------------------------------------------------
+// Purpose: no magic numbers for accessing m_Objects
+//-----------------------------------------------------------------------------
+enum OBJECT {
+    PLAYER = 0,
+    MAP_SECTION_1,
+    NONE
+};
+
 class CBaseGame {
 private:
     CWindow m_window;

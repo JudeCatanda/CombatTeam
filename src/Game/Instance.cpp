@@ -1,7 +1,6 @@
 #include "Instance.hpp"
 
 void CCube::Create() {
-
     m_Loader.CreateLoader("./assets/models/cube.obj");
     m_Loader.Read();
 
@@ -36,6 +35,17 @@ void CCube::Draw(void) {
 };
 
 void CCamera::Create() {
+    m_flFov = 45.0f;
+    m_vecPosition = glm::vec3(0.0f, 0.0f, 3.0f);
+    m_vecUp = glm::vec3(0.0, 1.0f, 0.0f);
+    m_vecRight = glm::vec3(1.0f, 0.0f, 0.0f);
+    m_vecTarget = glm::vec3(0.0f, 0.0f, 0.0f);
+
     m_matView = glm::lookAt(m_vecPosition, m_vecTarget, m_vecUp);
     m_matProjection = glm::perspective(glm::radians(m_flFov), m_flAspectRatio, m_flNear, m_flFar);
 };
+
+void CCamera::Send(CShaderProgram* ShaderProgram) {
+    glUniformMatrix4fv(ShaderProgram->GetUniformLoc("mat_Projection"), 1, GL_FALSE, glm::value_ptr(m_matProjection));
+    glUniformMatrix4fv(ShaderProgram->GetUniformLoc("mat_View"), 1, GL_FALSE, glm::value_ptr(m_matView));
+}

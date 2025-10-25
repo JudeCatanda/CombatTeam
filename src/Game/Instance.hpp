@@ -62,11 +62,26 @@ protected:
 
     CShader m_Fragment, m_Vertex;
     CShaderProgram m_Program;
+
+    glm::mat4 m_matModel;
 public:
     virtual void Create() = 0;
     virtual void Draw(void) = 0;
     virtual void Update() {};
     virtual ~IInstance3D() = default;
+
+    Buffer* GetVertexBuffer() const noexcept {
+        return (Buffer*)&m_VertexBuffer;
+    }
+    Buffer* GetElementBuffer() const noexcept {
+        return (Buffer*)&m_ElementBuffer;
+    }
+    CLayout* GetLayout() const noexcept {
+        return (CLayout*)&m_VertexArray;
+    }
+    CShaderProgram* GetShaderProgram() const noexcept {
+        return (CShaderProgram*)&m_Program;
+    }
 };
 
 class CCube : public IInstance3D {
@@ -82,4 +97,5 @@ public:
 class CCamera : public CBaseCamera {
 public:
     void Create() override;
+    void Send(CShaderProgram* ShaderProgram);
 };

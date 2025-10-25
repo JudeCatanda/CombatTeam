@@ -31,6 +31,7 @@ class CShaderProgram {
     void                               BindProgram();
     void                               UnbindProgram();
     unsigned int                       GetHandle() const;
+    unsigned int                       GetUniformLoc(const char* szUniformName);
     void                               CheckErrors();
     void                               Destroy();
 

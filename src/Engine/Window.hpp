@@ -34,7 +34,7 @@ public:
   bool                       CheckKeyState(int nKey);
 
   GLFWwindow*                GetHandle(void);
-  glm::ivec2*                GetSize();
+  glm::ivec2                GetSize();
   float*                     GetAspectRatio();
   void                       SetViewport();
   void                       SetFullScreen(bool bFullScreen);

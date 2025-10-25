@@ -92,3 +92,7 @@ void CShaderProgram::Destroy() {
 void CShaderProgram::CreateUniformBlock(const std::string& szBlockName) {
 
 };
+
+unsigned int CShaderProgram::GetUniformLoc(const char* szUniformName) {
+    return glGetUniformLocation(m_nHandle, szUniformName);
+};

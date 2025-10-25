@@ -22,15 +22,10 @@ GLFWwindow* CWindow::GetHandle(void) {
   return m_Handle;
 }
 
-glm::ivec2* CWindow::GetSize() {
-  glm::ivec2 local = glm::ivec2(0);
-  glfwGetWindowSize(m_Handle, &local.x, &local.y);
-  if(local.x == m_Size.x) { //we assume the last size was never changed so we return original or last size
-    return &m_Size;
-  } else {
-    glfwGetWindowSize(m_Handle, &m_Size.x, &m_Size.y);
-  }
-  return &m_Size;
+glm::ivec2 CWindow::GetSize() {
+    glm::ivec2 size;
+    glfwGetWindowSize(m_Handle, &size.x, &size.y);
+    return size;
 }
 
 int CWindow::ShouldClose() {
@@ -52,8 +47,8 @@ float *CWindow::GetAspectRatio() {
 }
 
 void CWindow::SetViewport() {
-  glm::ivec2* ViewportSize = GetSize();
-  glViewport(0, 0, ViewportSize->x, ViewportSize->y);
+  glm::ivec2 ViewportSize = GetSize();
+  glViewport(0, 0, ViewportSize.x, ViewportSize.y);
 }
 
 bool CWindow::IsKeyReleased(int nKey) {
