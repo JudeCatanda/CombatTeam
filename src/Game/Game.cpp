@@ -32,6 +32,7 @@ void CBaseGame::Render() {
     m_window.SetViewport();
 
     m_camera.SetAspectRatio(m_window.GetAspectRatio());
+    m_camera.Update();
     m_camera.Send(m_Objects[OBJECT::PLAYER]->GetShaderProgram());
     
     for(auto& objects : m_Objects) {

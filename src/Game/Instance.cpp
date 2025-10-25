@@ -29,9 +29,8 @@ void CCube::Create() {
 void CCube::Update() {
     float angle = (float)glfwGetTime() * 1.0f;
     m_matModel = glm::mat4(1.0f);
-    m_matModel = glm::translate(m_matModel, glm::vec3(0.0f, 0.0f, -3.0f)); //move backward so we can see
-    m_matModel = glm::rotate(m_matModel, angle, glm::vec3(0.0f, 1.0f, 1.0f));
-    m_matModel = glm::scale(m_matModel, glm::vec3(0.4f)); //make it small
+    m_matModel = glm::rotate(m_matModel, angle, glm::vec3(1.0f, 1.0f, 0.0f));
+    m_matModel = glm::scale(m_matModel, glm::vec3(1.2f)); //make it small
 
     UpdateMatrices();
 };
@@ -59,6 +58,11 @@ void CCamera::Create() {
     m_matView = glm::lookAt(m_vecPosition, m_vecTarget, m_vecUp);
     m_matProjection = glm::perspective(glm::radians(m_flFov), m_flAspectRatio, m_flNear, m_flFar);
 };
+
+void CCamera::Update() {
+    m_matView = glm::lookAt(m_vecPosition, m_vecTarget, m_vecUp);
+    m_matProjection = glm::perspective(glm::radians(m_flFov), m_flAspectRatio, m_flNear, m_flFar);
+}
 
 void CCamera::Send(CShaderProgram* ShaderProgram) {
     ShaderProgram->BindProgram();

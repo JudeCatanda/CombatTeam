@@ -34,6 +34,7 @@ protected:
     glm::vec3 m_vecTarget;
 public:
     virtual void Create() {};
+    virtual void Update() {};
 
     void SetAspectRatio(float flAspectRatio) {
         m_flAspectRatio = flAspectRatio;
@@ -109,10 +110,9 @@ public:
 class CCamera : public CBaseCamera {
 public:
     void Create() override;
+    void Update() override;
     void Send(CShaderProgram* ShaderProgram);
     void SetAspectRatio(float flAspectRatio) {
         m_flAspectRatio = flAspectRatio;
-        m_matProjection = glm::perspective(glm::radians(m_flFov), m_flAspectRatio, m_flNear, m_flFar);
-        std::cout << flAspectRatio << std::endl;
     }
 };
