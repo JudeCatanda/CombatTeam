@@ -35,7 +35,7 @@ public:
 
   GLFWwindow*                GetHandle(void);
   glm::ivec2                GetSize();
-  float*                     GetAspectRatio();
+  float                     GetAspectRatio();
   void                       SetViewport();
   void                       SetFullScreen(bool bFullScreen);
   bool                       IsFullScreen(void) const { return m_bFullScreen; };

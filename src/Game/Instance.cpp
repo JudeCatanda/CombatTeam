@@ -22,6 +22,18 @@ void CCube::Create() {
     m_VertexBuffer.Unbind();
 
     m_Program.UnbindProgram();
+    
+    m_matModel = glm::mat4(1.0f);
+};
+
+void CCube::Update() {
+    float angle = (float)glfwGetTime() * 1.0f;
+    m_matModel = glm::mat4(1.0f);
+    m_matModel = glm::translate(m_matModel, glm::vec3(0.0f, 0.0f, -3.0f)); //move backward so we can see
+    m_matModel = glm::rotate(m_matModel, angle, glm::vec3(0.0f, 1.0f, 1.0f));
+    m_matModel = glm::scale(m_matModel, glm::vec3(0.4f)); //make it small
+
+    UpdateMatrices();
 };
 
 void CCube::Draw(void) {
@@ -36,7 +48,10 @@ void CCube::Draw(void) {
 
 void CCamera::Create() {
     m_flFov = 45.0f;
-    m_vecPosition = glm::vec3(0.0f, 0.0f, 3.0f);
+    m_flNear = 0.1f;
+    m_flFar = 100.0f;
+
+    m_vecPosition = glm::vec3(0.0f, 0.0f, 10.0f);
     m_vecUp = glm::vec3(0.0, 1.0f, 0.0f);
     m_vecRight = glm::vec3(1.0f, 0.0f, 0.0f);
     m_vecTarget = glm::vec3(0.0f, 0.0f, 0.0f);
@@ -46,6 +61,8 @@ void CCamera::Create() {
 };
 
 void CCamera::Send(CShaderProgram* ShaderProgram) {
+    ShaderProgram->BindProgram();
     glUniformMatrix4fv(ShaderProgram->GetUniformLoc("mat_Projection"), 1, GL_FALSE, glm::value_ptr(m_matProjection));
     glUniformMatrix4fv(ShaderProgram->GetUniformLoc("mat_View"), 1, GL_FALSE, glm::value_ptr(m_matView));
+    ShaderProgram->UnbindProgram();
 }

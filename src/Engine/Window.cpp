@@ -40,10 +40,10 @@ bool CWindow::IsKeyPressed(int nKey) {
   return (glfwGetKey(m_Handle, nKey) == GLFW_PRESS) ? true : false;
 }
 
-float *CWindow::GetAspectRatio() {
+float CWindow::GetAspectRatio() {
   glfwGetWindowSize(m_Handle, &m_Size.x, &m_Size.y);
   m_flAspectRatio = (float)m_Size.x / (float)m_Size.y;
-  return &m_flAspectRatio;
+  return m_flAspectRatio;
 }
 
 void CWindow::SetViewport() {

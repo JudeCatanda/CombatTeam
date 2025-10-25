@@ -10,16 +10,15 @@ void CBaseGame::Init() {
     }
 
     m_camera.Create();
-    m_camera.SetAspectRatio((float)*(m_window.GetAspectRatio()));
-    m_camera.Send(m_Objects[OBJECT::PLAYER]->GetShaderProgram());
 
     proccess();
 };
 
 void CBaseGame::proccess() {
-    glEnable(GL_DEPTH_TEST);
     glDepthFunc(GL_LESS);
     glViewport(0, 0, 800, 600);
+    m_camera.SetAspectRatio(m_window.GetAspectRatio());
+    m_camera.Send(m_Objects[OBJECT::PLAYER]->GetShaderProgram());
 
     while(!m_window.ShouldClose()) {
         Render();
@@ -29,12 +28,15 @@ void CBaseGame::proccess() {
 
 void CBaseGame::Render() {
     glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    glClear(GL_COLOR_BUFFER_BIT);
     m_window.SetViewport();
+
+    m_camera.SetAspectRatio(m_window.GetAspectRatio());
+    m_camera.Send(m_Objects[OBJECT::PLAYER]->GetShaderProgram());
     
     for(auto& objects : m_Objects) {
-        objects->Draw();
         objects->Update();
+        objects->Draw();
     }
 
     glfwSwapBuffers(m_window.GetHandle());
@@ -42,7 +44,6 @@ void CBaseGame::Render() {
 }
 
 void CBaseGame::Update() {
-    m_camera.Send(m_Objects[OBJECT::PLAYER]->GetShaderProgram());
 };
 
 void CBaseGame::Destroy() {

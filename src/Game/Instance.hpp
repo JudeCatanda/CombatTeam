@@ -6,6 +6,7 @@
 #include "Model_Loader.hpp"
 #include "glm/glm.hpp"
 #include "glm/ext.hpp"
+#include <glfw/glfw3.h>
 
 //-----------------------------------------------------------------------------
 // Purpose: A Contract for every drawable and non-drawable objects
@@ -64,6 +65,16 @@ protected:
     CShaderProgram m_Program;
 
     glm::mat4 m_matModel;
+
+    void UpdateMatrices() {
+
+        m_Program.BindProgram();
+        glUniformMatrix4fv(
+                m_Program.GetUniformLoc("mat_Model"), 1, GL_FALSE, glm::value_ptr(m_matModel)
+        );
+
+        m_Program.UnbindProgram();
+    }
 public:
     virtual void Create() = 0;
     virtual void Draw(void) = 0;
@@ -92,10 +103,16 @@ private:
 public:
     void Create() override;
     void Draw(void) override;
+    void Update() override;
 };
 
 class CCamera : public CBaseCamera {
 public:
     void Create() override;
     void Send(CShaderProgram* ShaderProgram);
+    void SetAspectRatio(float flAspectRatio) {
+        m_flAspectRatio = flAspectRatio;
+        m_matProjection = glm::perspective(glm::radians(m_flFov), m_flAspectRatio, m_flNear, m_flFar);
+        std::cout << flAspectRatio << std::endl;
+    }
 };
