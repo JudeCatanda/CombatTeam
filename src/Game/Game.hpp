@@ -2,15 +2,13 @@
 
 #include "Window.hpp"
 #include "Model_Loader.hpp"
-
 #include "Layout.hpp"
 #include "Buffer.hpp"
 #include "Shader.hpp"
-
 #include <memory>
 
-#include "Instance.hpp"
-
+#include "Entities/Map.hpp"
+#include "Entities/Camera.hpp"
 
 //-----------------------------------------------------------------------------
 // Purpose: no magic numbers for accessing m_Objects
